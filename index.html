@@ -574,6 +574,38 @@
                 font-size: 0.88rem;
             }
         }
+
+        /* Always-visible horizontal scrollbar + edge shadows + hint so it's obvious a table scrolls */
+        .table-container, .sub-table-wrapper {
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: auto;
+            scrollbar-color: #4f46e5 #e0e7ff;
+            background:
+                linear-gradient(to right, #ffffff 30%, rgba(255,255,255,0)) left center / 40px 100% no-repeat local,
+                linear-gradient(to left, #ffffff 30%, rgba(255,255,255,0)) right center / 40px 100% no-repeat local,
+                radial-gradient(farthest-side at 0 50%, rgba(79,70,229,0.28), rgba(79,70,229,0)) left center / 14px 100% no-repeat scroll,
+                radial-gradient(farthest-side at 100% 50%, rgba(79,70,229,0.28), rgba(79,70,229,0)) right center / 14px 100% no-repeat scroll,
+                var(--bg-card);
+        }
+        .table-container::-webkit-scrollbar { height: 14px; }
+        .table-container::-webkit-scrollbar-track { background: #e0e7ff; border-radius: 0 0 14px 14px; }
+        .table-container::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 8px;
+            border: 3px solid #e0e7ff;
+        }
+        .sub-table-wrapper::-webkit-scrollbar { height: 14px; }
+        .sub-table-wrapper::-webkit-scrollbar-track { background: #e0e7ff; border-radius: 0 0 14px 14px; }
+        .sub-table-wrapper::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 8px; border: 3px solid #e0e7ff; }
+        .scroll-hint {
+            display: none;
+            margin-top: 0.5rem;
+            text-align: center;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--accent-indigo-dark);
+        }
+        .scroll-hint.show { display: block; }
     </style>
 </head>
 <body>
@@ -1050,6 +1082,31 @@
         renderSubTable();
         renderTable();
         updateHitCounters();
+
+        // Show a "swipe" hint under any table that is wider than its box, until scrolled to the end
+        const SCROLL_HINT_TEXT = { en: 'Swipe sideways to see more \u2192', ar: '\u0627\u0633\u062d\u0628 \u062c\u0627\u0646\u0628\u064b\u0627 \u0644\u0644\u0645\u0632\u064a\u062f \u2192' };
+        function updateScrollHints() {
+            document.querySelectorAll('.table-container, .sub-table-wrapper').forEach(function (box) {
+                let hint = box.nextElementSibling;
+                if (!hint || !hint.classList.contains('scroll-hint')) {
+                    hint = document.createElement('div');
+                    hint.className = 'scroll-hint';
+                    hint.setAttribute('aria-hidden', 'true');
+                    box.parentNode.insertBefore(hint, box.nextSibling);
+                    box.addEventListener('scroll', updateScrollHints, { passive: true });
+                }
+                hint.textContent = SCROLL_HINT_TEXT[currentLang] || SCROLL_HINT_TEXT.en;
+                const more = box.scrollWidth - box.clientWidth - box.scrollLeft > 4;
+                hint.classList.toggle('show', more);
+            });
+        }
+        const originalSetLanguage = setLanguage;
+        const originalSelectCount = selectCount;
+        window.setLanguage = function (lang) { originalSetLanguage(lang); updateScrollHints(); };
+        window.selectCount = function (n) { originalSelectCount(n); updateScrollHints(); };
+        window.addEventListener('resize', updateScrollHints);
+        window.addEventListener('load', updateScrollHints);
+        updateScrollHints();
     </script>
 </body>
 </html>
