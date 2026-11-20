@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense &amp; Hours Responsibility</title>
+    <!-- Inter & Cairo Fonts for Precision Fintech Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* High-Craft SaaS Design Tokens (Linear / Stripe / Vercel Aesthetic) */
+        :root {
+            --bg-page: #f4f6f9;
+            --bg-card: #ffffff;
+            --bg-subtle: #f8fafc;
+            --bg-elevated: #f1f5f9;
+            --border-hairline: rgba(15, 23, 42, 0.08);
+            --border-strong: rgba(15, 23, 42, 0.14);
+            --text-primary: #0f172a;
+            --text-value: #334155;
+            --text-secondary: #475569;
+            --text-muted: #6b7280;
+            --accent-indigo: #4f46e5;
+            --accent-indigo-dark: #4338ca;
+            --accent-indigo-soft: rgba(79, 70, 229, 0.09);
+            --accent-emerald: #059669;
+            --accent-emerald-soft: rgba(5, 150, 105, 0.09);
+            --accent-sky: #0284c7;
+            --accent-sky-soft: rgba(2, 132, 199, 0.08);
+            --accent-amber: #b45309;
+            --accent-amber-soft: rgba(245, 158, 11, 0.09);
+            --shadow-card: 
+                0 1px 2px rgba(15, 23, 42, 0.04),
+                0 8px 24px -4px rgba(79, 70, 229, 0.07),
+                0 24px 48px -12px rgba(15, 23, 42, 0.06);
+            --shadow-pill: 0 1px 2px rgba(15, 23, 42, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-page);
+            background-image: 
+                radial-gradient(ellipse 85% 55% at 50% -12%, rgba(79, 70, 229, 0.12), transparent),
+                radial-gradient(ellipse 60% 45% at 90% 5%, rgba(14, 165, 233, 0.08), transparent),
+                radial-gradient(ellipse 50% 40% at 10% 15%, rgba(16, 185, 129, 0.06), transparent);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2.5rem 1.25rem 4rem;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Main Elevated Container */
+        .app-shell {
+            max-width: 1180px;
+            margin: 0 auto;
+            background-color: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid rgba(79, 70, 229, 0.12);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Top Vibrant Multi-Stop Accent Rule */
+        .app-shell::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4f46e5 0%, #0ea5e9 52%, #10b981 100%);
+            z-index: 2;
+        }
+
+        /* Header Section */
+        .app-header {
+            padding: 2rem 2.25rem 1.75rem;
+            background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+            border-bottom: 1px solid var(--border-hairline);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            direction: ltr;
+        }
+
+        /* Embedded Table Directly Under Cards */
+        .table-section-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .table-section-title {
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .table-section-title.is-rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .sub-table-wrapper {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(79, 70, 229, 0.14);
+            border-radius: 14px;
+            overflow-x: auto;
+            box-shadow: var(--shadow-pill);
+            direction: ltr;
+        }
+
+        .bottom-table-section {
+            padding: 1.5rem 2.25rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .header-top-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1.25rem;
+        }
+
+        .title-block {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .eyebrow-row {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .period-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.28rem 0.78rem;
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            background-color: var(--accent-sky-soft);
+            color: var(--accent-sky);
+            border: 1px solid rgba(2, 132, 199, 0.22);
+        }
+
+        .period-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent-sky);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.16);
+        }
+
+        .app-title {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: var(--text-primary);
+            line-height: 1.25;
+        }
+
+        /* Fixed-Dimension Scrollable Language Switcher in Top-Right Header */
+        .lang-switcher {
+            display: inline-flex;
+            flex-shrink: 0;
+            background-color: #eef2ff;
+            padding: 4px;
+            border-radius: 12px;
+            border: 1px solid rgba(79, 70, 229, 0.16);
+            box-shadow: inset 0 1px 2px rgba(79, 70, 229, 0.06);
+            direction: ltr;
+        }
+
+        .lang-btn {
+            width: 122px;
+            min-width: 122px;
+            height: 42px;
+            flex-shrink: 0;
+            border: none;
+            border-radius: 9px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.94rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .lang-btn:hover:not(.active) {
+            color: var(--accent-indigo);
+            background-color: rgba(255, 255, 255, 0.65);
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(79, 70, 229, 0.28), 0 1px 2px rgba(15, 23, 42, 0.08);
+        }
+
+        /* Financial Summary Metric Cards Row */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: 2.15fr 1fr 1fr 1.05fr;
+            gap: 0.85rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .metric-card {
+            background-color: #ffffff;
+            border: 1px solid var(--border-hairline);
+            border-radius: 14px;
+            padding: 0.92rem 1.15rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.25rem;
+            box-shadow: var(--shadow-pill);
+            transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .metric-card:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+        }
+
+        /* Unified Total Expenses & Breakdown Card (Warm Amber Accent) */
+        .metric-card-expenses {
+            background: linear-gradient(135deg, #fffbeb 0%, #ffffff 65%);
+            border-color: rgba(245, 158, 11, 0.26);
+        }
+
+        .metric-card-expenses .metric-primary-line {
+            color: #92400e;
+        }
+
+        .metric-primary-line {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.45rem;
+        }
+
+        .metric-breakdown-sub {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Mom's Income Emerald Card */
+        .metric-card-income {
+            background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 75%);
+            border-color: rgba(16, 185, 129, 0.28);
+        }
+
+        .metric-card-income .metric-primary-line {
+            color: var(--accent-emerald);
+        }
+
+        /* Total Hours Sky-Blue Card */
+        .metric-card-hours {
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 75%);
+            border-color: rgba(14, 165, 233, 0.25);
+        }
+
+        .metric-card-hours .metric-primary-line {
+            color: #0369a1;
+        }
+
+        .metric-sub-label {
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* Shared Pool Indigo Accent Card (Matches sibling metric cards) */
+        .metric-card-net {
+            background: linear-gradient(135deg, #eef2ff 0%, #ffffff 75%);
+            border-color: rgba(79, 70, 229, 0.25);
+        }
+
+        .metric-card-net .metric-primary-line {
+            color: var(--accent-indigo);
+        }
+
+        /* Interactive Contributor Selector Dock */
+        .controls-bar {
+            padding: 1.35rem 2.25rem;
+            background: linear-gradient(90deg, #f8fafc 0%, #f5f7ff 100%);
+            border-bottom: 1px solid var(--border-hairline);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            direction: ltr;
+        }
+
+        .controls-bar.is-rtl {
+            flex-direction: row-reverse;
+        }
+
+        .prompt-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        .controls-bar.is-rtl .prompt-title {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .segmented-dock {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            background-color: #eef2ff;
+            padding: 5px;
+            border-radius: 13px;
+            border: 1px solid rgba(79, 70, 229, 0.16);
+            box-shadow: inset 0 1px 2px rgba(79, 70, 229, 0.06);
+            direction: ltr;
+        }
+
+        .num-btn {
+            width: 42px;
+            height: 40px;
+            border: none;
+            border-radius: 9px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.96rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .num-btn:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.85);
+            color: var(--accent-indigo);
+            transform: translateY(-1px);
+        }
+
+        .num-btn.active {
+            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+            color: #ffffff;
+            box-shadow: 0 3px 8px rgba(79, 70, 229, 0.32);
+            transform: scale(1.04);
+        }
+
+        /* Data Table Layout (Always fixed left-to-right column order) */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            direction: ltr;
+            background-color: var(--bg-card);
+            border: 1px solid rgba(79, 70, 229, 0.14);
+            border-radius: 14px;
+            box-shadow: var(--shadow-pill);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-variant-numeric: tabular-nums;
+            direction: ltr;
+        }
+
+        thead th {
+            background-color: #f8faff;
+            padding: 1rem 1.75rem;
+            border-bottom: 1px solid rgba(79, 70, 229, 0.14);
+            vertical-align: bottom;
+            white-space: nowrap;
+        }
+
+        .th-main {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.045em;
+            color: #3730a3;
+        }
+
+        @keyframes rowReveal {
+            from {
+                opacity: 0;
+                transform: translateY(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border-hairline);
+            transition: background-color 0.15s ease;
+            animation: rowReveal 0.22s ease both;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(79, 70, 229, 0.03);
+        }
+
+        td {
+            padding: 1.1rem 1.75rem;
+            font-size: 0.98rem;
+            white-space: nowrap;
+        }
+
+        /* Kid Identifier Pill (Soft Indigo Tint) */
+        .kid-pill-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .kid-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 34px;
+            height: 34px;
+            padding: 0 0.6rem;
+            border-radius: 9px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            background-color: #eef2ff;
+            color: #3730a3;
+            border: 1px solid rgba(79, 70, 229, 0.18);
+        }
+
+        /* Exact Typography Rule:
+           - Main numbers, +, and dollar amounts: #334155, font-weight 600
+           - Parenthetical numbers AND OR/أو: #6b7280, font-weight 500 */
+        .val-main {
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .muted-paren {
+            font-weight: 500;
+            color: #6b7280;
+            margin: 0 0.18rem;
+            unicode-bidi: isolate;
+        }
+
+        .word-or {
+            font-weight: 500;
+            color: #6b7280;
+            margin: 0 0.38rem;
+        }
+
+        /* Bidirectional Isolation for LTR Numbers/Dollars inside RTL Arabic Cells */
+        .bidi-num {
+            direction: ltr;
+            unicode-bidi: isolate;
+            display: inline-block;
+        }
+
+        td.cell-rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        /* Stealth Desktop-Only Hit Counter (Matches #f4f6f9 background until highlighted) */
+        .stealth-counter {
+            position: fixed;
+            bottom: 12px;
+            right: 16px;
+            color: var(--bg-page);
+            background-color: transparent;
+            font-size: 12px;
+            font-weight: 500;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.02em;
+            z-index: 50;
+            user-select: text;
+            -webkit-user-select: text;
+        }
+
+        .stealth-counter::selection {
+            background-color: #4f46e5;
+            color: #ffffff;
+        }
+
+        /* Completely invisible when visiting from a mobile or touch device */
+        @media (max-width: 768px), (pointer: coarse) {
+            .stealth-counter {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+            }
+        }
+
+        /* Responsive Adaptations */
+        @media (max-width: 960px) {
+            .metrics-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.75rem 2.5rem;
+            }
+            .app-header, .controls-bar {
+                padding-left: 1.25rem;
+                padding-right: 1.25rem;
+            }
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+            thead th, td {
+                padding: 0.9rem 1rem;
+            }
+            .lang-btn {
+                width: 108px;
+                min-width: 108px;
+                height: 40px;
+                font-size: 0.88rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="app-shell">
+        <!-- Header with Title, Financial Summary Cards & Top-Right Fixed-Dimension Language Switcher -->
+        <header class="app-header">
+            <div class="header-top-row">
+                <div class="title-block">
+                    <div class="eyebrow-row">
+                        <span class="period-badge">
+                            <span class="period-dot"></span>
+                            <span id="ui-period">For 30 Days</span>
+                        </span>
+                    </div>
+                    <h1 id="ui-title" class="app-title">Expense &amp; Hours Responsibility</h1>
+                </div>
+
+                <!-- Scrollable Top-Right Segmented Language Switcher (Never shifts position) -->
+                <div class="lang-switcher" role="group" aria-label="Language Switcher">
+                    <button id="btn-en" type="button" class="lang-btn active" onclick="setLanguage('en')">English</button>
+                    <button id="btn-ar" type="button" class="lang-btn" onclick="setLanguage('ar')">العربية</button>
+                </div>
+            </div>
+
+            <!-- Structured Financial Summary Cards -->
+            <div class="metrics-grid">
+                <!-- Unified Total Expenses & Parenthetical Breakdown -->
+                <div class="metric-card metric-card-expenses">
+                    <div class="metric-primary-line">
+                        <span id="ui-total-expenses">Total Expenses: $4,000</span>
+                    </div>
+                    <div id="ui-expense-breakdown" class="metric-breakdown-sub">
+                        (Rent $3,150 &bull; Utilities $330 &bull; Food $520)
+                    </div>
+                </div>
+
+                <!-- Mom's Income Emerald Card -->
+                <div class="metric-card metric-card-income">
+                    <div class="metric-primary-line">
+                        <span id="ui-moms-income">Mom's Income: $800</span>
+                    </div>
+                    <div id="ui-moms-sub" class="metric-sub-label">Applied toward total</div>
+                </div>
+
+                <!-- Total Hours Sky-Blue Card -->
+                <div class="metric-card metric-card-hours">
+                    <div class="metric-primary-line">
+                        <span id="ui-total-hours">Total Hours: 720 hrs</span>
+                    </div>
+                    <div class="metric-primary-line">
+                        <span id="ui-gov-hours">Hours paid by the government: 78 hrs</span>
+                    </div>
+                    <div class="metric-primary-line">
+                        <span id="ui-remaining-hours">Total Remaining Hours: 642 hrs</span>
+                    </div>
+                    <div id="ui-hourly-rate" class="metric-sub-label">Valued at $18 / hr</div>
+                </div>
+
+                <!-- Shared Pool Indigo Card -->
+                <div class="metric-card metric-card-net">
+                    <div class="metric-primary-line">
+                        <span id="ui-net-pool">Shared Pool: $3,200</span>
+                    </div>
+                    <div id="ui-net-sub" class="metric-sub-label">Split among kids</div>
+                </div>
+            </div>
+
+            <!-- New 4-Column Table Directly Under Cards -->
+            <div class="table-section-block">
+                <h2 id="ui-top-table-title" class="table-section-title">How it is now</h2>
+                <div class="sub-table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <span id="sub-th-kids" class="th-main">Kids</span>
+                                </th>
+                                <th>
+                                    <span id="sub-th-hours-paid" class="th-main">Share of Hours (Paid)</span>
+                                </th>
+                                <th>
+                                    <span id="sub-th-hours-unpaid" class="th-main">Share of Hours (Unpaid)</span>
+                                </th>
+                                <th>
+                                    <span id="sub-th-expenses" class="th-main">Share of Expenses</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="sub-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </header>
+
+        <!-- Contributor Count Selector (1-9) -->
+        <section class="controls-bar">
+            <label id="ui-prompt" class="prompt-title">How many kids will contribute?</label>
+            <div id="number-buttons" class="segmented-dock" role="group" aria-label="Number of contributing kids"></div>
+        </section>
+
+        <!-- 4-Column Responsibility Table (Fixed left-to-right column order) -->
+        <section class="bottom-table-section">
+            <h2 id="ui-bottom-table-title" class="table-section-title">Fair distribution of time and expenses</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <span id="th-kids" class="th-main">Kids</span>
+                            </th>
+                            <th>
+                                <span id="th-hours" class="th-main">Share of Hours</span>
+                            </th>
+                            <th>
+                                <span id="th-expenses" class="th-main">Share of Expenses</span>
+                            </th>
+                            <th>
+                                <span id="th-total" class="th-main">Total Share of Responsibility</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Stealth Desktop-Only Hit & Unique Device Counter -->
+    <div id="stealth-hit-counter" class="stealth-counter" aria-hidden="true"></div>
+
+    <script>
+        // Core Financial & Time Constants
+        const RAW_HOURS = 720;
+        const GOV_PAID_HOURS = 78;
+        const TOTAL_HOURS = RAW_HOURS - GOV_PAID_HOURS; // 642 hrs
+        const TOTAL_EXPENSES = 4000;
+        const MOMS_INCOME = 800;
+        const SHARED_EXPENSES = TOTAL_EXPENSES - MOMS_INCOME; // $3,200
+        const HOURLY_RATE = 18;
+
+        // Application State
+        let selectedCount = 6; // Defaults to 6 kids (rows 4 through 9)
+        let currentLang = 'en';
+
+        // Bilingual Dictionary (Words/labels only; numeric values & column positions stay constant)
+        const i18n = {
+            en: {
+                title: "Expense & Hours Responsibility",
+                period: "For 30 Days",
+                totalExpenses: "Total Expenses: $4,000",
+                expenseBreakdown: "(Rent $3,150 • Utilities $330 • Food $520)",
+                momsIncome: "Mom's Income: $800",
+                momsSub: "Applied toward total",
+                totalHours: "Total Hours: 720 hrs",
+                govHours: "Hours paid by the government: 78 hrs",
+                remainingHours: "Total Remaining Hours: 642 hrs",
+                hourlyRate: "Valued at $18 / hr",
+                netPool: "Shared Pool: $3,200",
+                netSub: "Split among kids",
+                topTableTitle: "How it is now",
+                bottomTableTitle: "Fair distribution of time and expenses",
+                prompt: "How many kids will contribute?",
+                thKids: "Kids",
+                thHours: "Share of Hours",
+                thExpenses: "Share of Expenses",
+                thTotal: "Total Share of Responsibility",
+                subThKids: "Kids",
+                subThHoursPaid: "Share of Hours (Paid)",
+                subThHoursUnpaid: "Share of Hours (Unpaid)",
+                subThExpenses: "Share of Expenses",
+                subRow1Name: "Somaya",
+                subRow2Name: "Adel",
+                hrs: "hrs",
+                days: "days",
+                or: "OR"
+            },
+            ar: {
+                title: "جدول مسؤولية المصاريف والساعات",
+                period: "لمدة 30 يوم",
+                totalExpenses: "المصاريف الكاملة: $4,000",
+                expenseBreakdown: "(الإيجار $3,150 • المرافق $330 • الطعام $520)",
+                momsIncome: "دخل الأم: $800",
+                momsSub: "تُخصم من المصاريف الكاملة",
+                totalHours: "ساعات كاملة: 720 ساعة",
+                govHours: "ساعات مدفوعة من الحكومة: 78 ساعة",
+                remainingHours: "إجمالي الساعات المتبقية: 642 ساعة",
+                hourlyRate: "بقيمة $18 / ساعة",
+                netPool: "صافي المصاريف المشتركة: $3,200",
+                netSub: "تُوزع على الأطفال",
+                topTableTitle: "الوضع الحالي",
+                bottomTableTitle: "التوزيع العادل للوقت والمصاريف",
+                prompt: "كم عدد الأطفال اليشاركون؟",
+                thKids: "الأطفال",
+                thHours: "حصة الساعات",
+                thExpenses: "حصة المصاريف",
+                thTotal: "الحصة الكاملة من المسؤولية",
+                subThKids: "الأطفال",
+                subThHoursPaid: "حصة الساعات (مدفوعة)",
+                subThHoursUnpaid: "حصة الساعات (غير مدفوعة)",
+                subThExpenses: "حصة المصاريف",
+                subRow1Name: "سمية",
+                subRow2Name: "عادل",
+                hrs: "ساعة",
+                days: "أيام",
+                or: "أو"
+            }
+        };
+
+        /**
+         * Formats numbers up to 2 decimal places without trailing zeros.
+         */
+        function fmtNum(val) {
+            return Number.isInteger(val)
+                ? val.toLocaleString('en-US')
+                : Number(val.toFixed(2)).toLocaleString('en-US');
+        }
+
+        /**
+         * Renders the 1-9 segmented contributor selector buttons.
+         */
+        function renderButtons() {
+            const container = document.getElementById('number-buttons');
+            if (!container) return;
+            container.innerHTML = '';
+
+            for (let i = 1; i <= 9; i++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'num-btn' + (i === selectedCount ? ' active' : '');
+                btn.textContent = i;
+                btn.setAttribute('aria-pressed', i === selectedCount ? 'true' : 'false');
+                btn.onclick = () => selectCount(i);
+                container.appendChild(btn);
+            }
+        }
+
+        /**
+         * Updates the selected contributor count (1-9) and re-renders the table.
+         */
+        function selectCount(count) {
+            selectedCount = count;
+            renderButtons();
+            renderTable();
+        }
+
+        /**
+         * Switches interface text between English ('en') and Arabic ('ar').
+         */
+        function setLanguage(lang) {
+            currentLang = lang;
+            const t = i18n[lang];
+
+            document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+            document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+
+            document.getElementById('ui-title').textContent = t.title;
+            document.getElementById('ui-period').textContent = t.period;
+            document.getElementById('ui-total-expenses').textContent = t.totalExpenses;
+            document.getElementById('ui-expense-breakdown').textContent = t.expenseBreakdown;
+            document.getElementById('ui-moms-income').textContent = t.momsIncome;
+            document.getElementById('ui-moms-sub').textContent = t.momsSub;
+            document.getElementById('ui-total-hours').textContent = t.totalHours;
+            document.getElementById('ui-gov-hours').textContent = t.govHours;
+            document.getElementById('ui-remaining-hours').textContent = t.remainingHours;
+            document.getElementById('ui-hourly-rate').textContent = t.hourlyRate;
+            document.getElementById('ui-net-pool').textContent = t.netPool;
+            document.getElementById('ui-net-sub').textContent = t.netSub;
+            document.getElementById('ui-prompt').textContent = t.prompt;
+
+            const topTableTitle = document.getElementById('ui-top-table-title');
+            const bottomTableTitle = document.getElementById('ui-bottom-table-title');
+            if (topTableTitle) {
+                topTableTitle.textContent = t.topTableTitle;
+                topTableTitle.classList.toggle('is-rtl', lang === 'ar');
+            }
+            if (bottomTableTitle) {
+                bottomTableTitle.textContent = t.bottomTableTitle;
+                bottomTableTitle.classList.toggle('is-rtl', lang === 'ar');
+            }
+
+            const controlsBar = document.querySelector('.controls-bar');
+            if (controlsBar) {
+                controlsBar.classList.toggle('is-rtl', lang === 'ar');
+            }
+
+            document.getElementById('th-kids').textContent = t.thKids;
+            document.getElementById('th-hours').textContent = t.thHours;
+            document.getElementById('th-expenses').textContent = t.thExpenses;
+            document.getElementById('th-total').textContent = t.thTotal;
+
+            document.getElementById('sub-th-kids').textContent = t.subThKids;
+            document.getElementById('sub-th-hours-paid').textContent = t.subThHoursPaid;
+            document.getElementById('sub-th-hours-unpaid').textContent = t.subThHoursUnpaid;
+            document.getElementById('sub-th-expenses').textContent = t.subThExpenses;
+
+            renderSubTable();
+            renderTable();
+        }
+
+        /**
+         * Renders the top "How it is now" table for Somaya and Adel.
+         */
+        function renderSubTable() {
+            const tbody = document.getElementById('sub-table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const t = i18n[currentLang];
+            const isAr = currentLang === 'ar';
+            const cellDir = isAr ? 'rtl' : 'ltr';
+            const cellClass = isAr ? 'cell-rtl' : '';
+
+            const rows = [
+                { name: t.subRow1Name, paidHrs: 78, unpaidHrs: 222, expense: 100 },
+                { name: t.subRow2Name, paidHrs: 0, unpaidHrs: 420, expense: 3100 }
+            ];
+
+            rows.forEach((row) => {
+                const tr = document.createElement('tr');
+                const paidDays = fmtNum(row.paidHrs / 24);
+                const unpaidDays = fmtNum(row.unpaidHrs / 24);
+
+                tr.innerHTML = `
+                    <td>
+                        <div class="kid-pill-wrap">
+                            <span class="kid-badge">${row.name}</span>
+                        </div>
+                    </td>
+                    <td dir="${cellDir}" class="${cellClass}">
+                        <span class="val-main"><span class="bidi-num">${fmtNum(row.paidHrs)}</span> ${t.hrs}</span>
+                        <span class="muted-paren">(<span class="bidi-num">${paidDays}</span> ${t.days})</span>
+                    </td>
+                    <td dir="${cellDir}" class="${cellClass}">
+                        <span class="val-main"><span class="bidi-num">${fmtNum(row.unpaidHrs)}</span> ${t.hrs}</span>
+                        <span class="muted-paren">(<span class="bidi-num">${unpaidDays}</span> ${t.days})</span>
+                    </td>
+                    <td dir="${cellDir}" class="${cellClass}">
+                        <span class="val-main"><span class="bidi-num">$${fmtNum(row.expense)}</span></span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        /**
+         * Renders the responsibility table rows ending at Kid 9.
+         */
+        function renderTable() {
+            const tbody = document.getElementById('table-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            const t = i18n[currentLang];
+            const isAr = currentLang === 'ar';
+            const cellDir = isAr ? 'rtl' : 'ltr';
+            const cellClass = isAr ? 'cell-rtl' : '';
+
+            // Exact count of rows ending with 9
+            const startKid = 10 - selectedCount;
+
+            // Equal division of 642 hours and 24-hour day equivalent
+            const hoursEach = TOTAL_HOURS / selectedCount;
+            const daysEach = hoursEach / 24;
+            const hoursDollarEach = hoursEach * HOURLY_RATE;
+
+            const hoursFormatted = fmtNum(hoursEach);
+            const daysFormatted = fmtNum(daysEach);
+            const hoursDollarFormatted = fmtNum(hoursDollarEach);
+
+            for (let kid = startKid; kid <= 9; kid++) {
+                const tr = document.createElement('tr');
+                tr.style.animationDelay = `${(kid - startKid) * 25}ms`;
+
+                // Expense percentage split: Kid 9 takes 100% if alone, else 75% (25% split among rest)
+                let expensePct = 0;
+                if (selectedCount === 1) {
+                    expensePct = 100;
+                } else if (kid === 9) {
+                    expensePct = 75;
+                } else {
+                    expensePct = 25 / (selectedCount - 1);
+                }
+
+                const expenseDollar = (expensePct / 100) * SHARED_EXPENSES;
+                const totalDollar = hoursDollarEach + expenseDollar;
+
+                const pctFormatted = fmtNum(expensePct);
+                const expenseDollarFormatted = fmtNum(expenseDollar);
+                const totalDollarFormatted = fmtNum(totalDollar);
+
+                // Column 1: Kids
+                const tdKid = document.createElement('td');
+                tdKid.innerHTML = `
+                    <div class="kid-pill-wrap">
+                        <span class="kid-badge">${kid}</span>
+                    </div>
+                `;
+                tr.appendChild(tdKid);
+
+                // Column 2: Share of Hours
+                const tdHours = document.createElement('td');
+                tdHours.dir = cellDir;
+                tdHours.className = cellClass;
+                tdHours.innerHTML = `
+                    <span class="val-main"><span class="bidi-num">${hoursFormatted}</span> ${t.hrs}</span>
+                    <span class="muted-paren">(<span class="bidi-num">${daysFormatted}</span> ${t.days})</span>
+                    <span class="word-or">${t.or}</span>
+                    <span class="val-main"><span class="bidi-num">$${hoursDollarFormatted}</span></span>
+                `;
+                tr.appendChild(tdHours);
+
+                // Column 3: Share of Expenses
+                const tdExpenses = document.createElement('td');
+                tdExpenses.dir = cellDir;
+                tdExpenses.className = cellClass;
+                tdExpenses.innerHTML = `
+                    <span class="val-main"><span class="bidi-num">$${expenseDollarFormatted}</span></span>
+                    <span class="muted-paren">(<span class="bidi-num">${pctFormatted}%</span>)</span>
+                `;
+                tr.appendChild(tdExpenses);
+
+                // Column 4: Total Share of Responsibility
+                const tdTotal = document.createElement('td');
+                tdTotal.dir = cellDir;
+                tdTotal.className = cellClass;
+                tdTotal.innerHTML = `
+                    <span class="val-main"><span class="bidi-num">${hoursFormatted}</span> ${t.hrs}</span>
+                    <span class="muted-paren">(<span class="bidi-num">${daysFormatted}</span> ${t.days})</span>
+                    <span class="val-main"> + <span class="bidi-num">$${expenseDollarFormatted}</span></span>
+                    <span class="word-or">${t.or}</span>
+                    <span class="val-main"><span class="bidi-num">$${totalDollarFormatted}</span></span>
+                `;
+                tr.appendChild(tdTotal);
+
+                tbody.appendChild(tr);
+            }
+        }
+
+        /**
+         * Updates the stealth desktop-only hit counter & unique device counter.
+         */
+        function updateHitCounters() {
+            const counterEl = document.getElementById('stealth-hit-counter');
+            if (!counterEl) return;
+
+            try {
+                const hitsKey = 'expense_table_hit_count';
+                const uniqueCountKey = 'expense_table_unique_device_count';
+                const deviceFlagKey = 'expense_table_device_counted';
+
+                const currentHits = (parseInt(localStorage.getItem(hitsKey), 10) || 0) + 1;
+                localStorage.setItem(hitsKey, String(currentHits));
+
+                let uniqueDevices = parseInt(localStorage.getItem(uniqueCountKey), 10) || 0;
+                if (!localStorage.getItem(deviceFlagKey)) {
+                    uniqueDevices += 1;
+                    localStorage.setItem(uniqueCountKey, String(uniqueDevices));
+                    localStorage.setItem(deviceFlagKey, '1');
+                }
+
+                counterEl.textContent = `Hits: ${currentHits} | Unique: ${uniqueDevices}`;
+            } catch (err) {
+                counterEl.textContent = 'Hits: 1 | Unique: 1';
+            }
+        }
+
+        // Expose functions explicitly on window for inline handlers
+        window.setLanguage = setLanguage;
+        window.selectCount = selectCount;
+
+        // Initialize application
+        renderButtons();
+        renderSubTable();
+        renderTable();
+        updateHitCounters();
+    </script>
+</body>
+</html>
