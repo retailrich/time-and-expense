@@ -342,44 +342,56 @@
         .segmented-dock {
             display: inline-flex;
             flex-wrap: wrap;
-            gap: 4px;
+            gap: 8px;
             background-color: #eef2ff;
-            padding: 5px;
-            border-radius: 13px;
-            border: 1px solid rgba(79, 70, 229, 0.16);
-            box-shadow: inset 0 1px 2px rgba(79, 70, 229, 0.06);
+            padding: 8px;
+            border-radius: 15px;
+            border: 1.5px solid rgba(79, 70, 229, 0.24);
+            box-shadow: inset 0 1px 3px rgba(79, 70, 229, 0.08);
             direction: ltr;
         }
 
         .num-btn {
-            width: 42px;
-            height: 40px;
-            border: none;
-            border-radius: 9px;
-            background: transparent;
-            color: var(--text-secondary);
+            width: 46px;
+            height: 44px;
+            border: 1.5px solid rgba(79, 70, 229, 0.28);
+            border-bottom-width: 3px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
+            color: #3730a3;
             font-family: inherit;
-            font-size: 0.96rem;
-            font-weight: 700;
+            font-size: 1.02rem;
+            font-weight: 800;
             font-variant-numeric: tabular-nums;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: 0 2px 4px rgba(15, 23, 42, 0.07);
+            transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
         }
 
         .num-btn:hover:not(.active) {
-            background-color: rgba(255, 255, 255, 0.85);
-            color: var(--accent-indigo);
-            transform: translateY(-1px);
+            background: linear-gradient(180deg, #ffffff 0%, #eef2ff 100%);
+            color: var(--accent-indigo-dark);
+            border-color: var(--accent-indigo);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(79, 70, 229, 0.22);
+        }
+
+        .num-btn:active {
+            transform: translateY(1px);
+            border-bottom-width: 1.5px;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
         }
 
         .num-btn.active {
-            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+            background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
             color: #ffffff;
-            box-shadow: 0 3px 8px rgba(79, 70, 229, 0.32);
-            transform: scale(1.04);
+            border-color: #312e81;
+            border-bottom-width: 3px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.38);
+            transform: translateY(-1px) scale(1.04);
         }
 
         /* Data Table Layout (Always fixed left-to-right column order) */
