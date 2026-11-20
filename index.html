@@ -1,0 +1,1059 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en" dir="ltr"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Expense &amp;amp; Hours Responsibility&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Inter &amp; Cairo Fonts for Precision Fintech Typography --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* High-Craft SaaS Design Tokens (Linear / Stripe / Vercel Aesthetic) */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--bg-page: #f4f6f9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--bg-card: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--bg-subtle: #f8fafc;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--bg-elevated: #f1f5f9;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--border-hairline: rgba(15, 23, 42, 0.08);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--border-strong: rgba(15, 23, 42, 0.14);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--text-primary: #0f172a;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--text-value: #334155;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--text-secondary: #475569;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--text-muted: #6b7280;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--accent-indigo: #4f46e5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--accent-indigo-dark: #4338ca;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--accent-indigo-soft: rgba(79, 70, 229, 0.09);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--accent-emerald: #059669;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--accent-emerald-soft: rgba(5, 150, 105, 0.09);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--accent-sky: #0284c7;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--accent-sky-soft: rgba(2, 132, 199, 0.08);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--accent-amber: #b45309;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--accent-amber-soft: rgba(245, 158, 11, 0.09);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--shadow-card:<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>0 1px 2px rgba(15, 23, 42, 0.04),</p>
+<p class="p1"><span class="Apple-converted-space">                </span>0 8px 24px -4px rgba(79, 70, 229, 0.07),</p>
+<p class="p1"><span class="Apple-converted-space">                </span>0 24px 48px -12px rgba(15, 23, 42, 0.06);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--shadow-pill: 0 1px 2px rgba(15, 23, 42, 0.05);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>* {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--bg-page);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-image:<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>radial-gradient(ellipse 85% 55% at 50% -12%, rgba(79, 70, 229, 0.12), transparent),</p>
+<p class="p1"><span class="Apple-converted-space">                </span>radial-gradient(ellipse 60% 45% at 90% 5%, rgba(14, 165, 233, 0.08), transparent),</p>
+<p class="p1"><span class="Apple-converted-space">                </span>radial-gradient(ellipse 50% 40% at 10% 15%, rgba(16, 185, 129, 0.06), transparent);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-primary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 2.5rem 1.25rem 4rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-font-smoothing: antialiased;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-moz-osx-font-smoothing: grayscale;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Main Elevated Container */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.app-shell {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 1180px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--bg-card);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(79, 70, 229, 0.12);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: var(--shadow-card);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Top Vibrant Multi-Stop Accent Rule */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.app-shell::before {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>content: "";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>right: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(90deg, #4f46e5 0%, #0ea5e9 52%, #10b981 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 2;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Header Section */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.app-header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 2rem 2.25rem 1.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid var(--border-hairline);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 1.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>direction: ltr;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Embedded Table Directly Under Cards */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.table-section-block {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 0.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.table-section-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.02rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-primary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: -0.01em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.table-section-title.is-rtl {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>direction: rtl;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: right;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sub-table-wrapper {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--bg-card);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(79, 70, 229, 0.14);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow-x: auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: var(--shadow-pill);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>direction: ltr;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.bottom-table-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1.5rem 2.25rem 2rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 0.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header-top-row {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: flex-start;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.title-block {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 0.45rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.eyebrow-row {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 0.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.period-badge {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 0.4rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0.28rem 0.78rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 999px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.76rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 0.02em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--accent-sky-soft);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent-sky);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(2, 132, 199, 0.22);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.period-dot {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 6px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--accent-sky);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.16);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.app-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.7rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 800;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: -0.025em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-primary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.25;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Fixed-Dimension Scrollable Language Switcher in Top-Right Header */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lang-switcher {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #eef2ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(79, 70, 229, 0.16);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: inset 0 1px 2px rgba(79, 70, 229, 0.06);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>direction: ltr;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lang-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 122px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-width: 122px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 42px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-shrink: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 9px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-secondary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: inherit;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.94rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lang-btn:hover:not(.active) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent-indigo);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: rgba(255, 255, 255, 0.65);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.lang-btn.active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 6px rgba(79, 70, 229, 0.28), 0 1px 2px rgba(15, 23, 42, 0.08);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Financial Summary Metric Cards Row */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metrics-grid {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: 2.15fr 1fr 1fr 1.05fr;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 0.85rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-variant-numeric: tabular-nums;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid var(--border-hairline);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0.92rem 1.15rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 0.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: var(--shadow-pill);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-card:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: var(--border-strong);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-1px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Unified Total Expenses &amp; Breakdown Card (Warm Amber Accent) */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-card-expenses {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #fffbeb 0%, #ffffff 65%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: rgba(245, 158, 11, 0.26);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-card-expenses .metric-primary-line {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #92400e;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-primary-line {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.98rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-primary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: baseline;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 0.45rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-breakdown-sub {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.82rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.4;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Mom's Income Emerald Card */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-card-income {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #ecfdf5 0%, #ffffff 75%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: rgba(16, 185, 129, 0.28);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-card-income .metric-primary-line {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent-emerald);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Total Hours Sky-Blue Card */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-card-hours {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 75%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: rgba(14, 165, 233, 0.25);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-card-hours .metric-primary-line {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #0369a1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-sub-label {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.76rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-muted);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Shared Pool Indigo Accent Card (Matches sibling metric cards) */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-card-net {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #eef2ff 0%, #ffffff 75%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: rgba(79, 70, 229, 0.25);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.metric-card-net .metric-primary-line {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent-indigo);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Interactive Contributor Selector Dock */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.controls-bar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1.35rem 2.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(90deg, #f8fafc 0%, #f5f7ff 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid var(--border-hairline);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: space-between;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>direction: ltr;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.controls-bar.is-rtl {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: row-reverse;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.prompt-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.05rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-primary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: -0.01em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.controls-bar.is-rtl .prompt-title {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>direction: rtl;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: right;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.segmented-dock {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #eef2ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 13px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(79, 70, 229, 0.16);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: inset 0 1px 2px rgba(79, 70, 229, 0.06);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>direction: ltr;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.num-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 42px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 9px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-secondary);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: inherit;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.96rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-variant-numeric: tabular-nums;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.14s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.num-btn:hover:not(.active) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: rgba(255, 255, 255, 0.85);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--accent-indigo);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-1px);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.num-btn.active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 3px 8px rgba(79, 70, 229, 0.32);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.04);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Data Table Layout (Always fixed left-to-right column order) */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.table-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow-x: auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>direction: ltr;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--bg-card);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(79, 70, 229, 0.14);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: var(--shadow-pill);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>table {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-collapse: collapse;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: left;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-variant-numeric: tabular-nums;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>direction: ltr;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>thead th {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f8faff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1rem 1.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid rgba(79, 70, 229, 0.14);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>vertical-align: bottom;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>white-space: nowrap;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.th-main {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.8rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 0.045em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #3730a3;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes rowReveal {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>from {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>transform: translateY(4px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>to {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>opacity: 1;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>transform: translateY(0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>tbody tr {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid var(--border-hairline);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.15s ease;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: rowReveal 0.22s ease both;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>tbody tr:last-child {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>tbody tr:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: rgba(79, 70, 229, 0.03);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>td {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 1.1rem 1.75rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.98rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>white-space: nowrap;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Kid Identifier Pill (Soft Indigo Tint) */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.kid-pill-wrap {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 0.55rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.kid-badge {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-width: 34px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 34px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0 0.6rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 9px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.92rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 700;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #eef2ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #3730a3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid rgba(79, 70, 229, 0.18);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Exact Typography Rule:</p>
+<p class="p1"><span class="Apple-converted-space">           </span>- Main numbers, +, and dollar amounts: #334155, font-weight 600</p>
+<p class="p1"><span class="Apple-converted-space">           </span>- Parenthetical numbers AND OR/أو: #6b7280, font-weight 500 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.val-main {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 600;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #334155;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.muted-paren {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #6b7280;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 0.18rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>unicode-bidi: isolate;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.word-or {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #6b7280;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 0.38rem;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Bidirectional Isolation for LTR Numbers/Dollars inside RTL Arabic Cells */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.bidi-num {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>direction: ltr;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>unicode-bidi: isolate;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>td.cell-rtl {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>direction: rtl;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: right;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Stealth Desktop-Only Hit Counter (Matches #f4f6f9 background until highlighted) */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stealth-counter {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>bottom: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>right: 16px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--bg-page);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: transparent;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-variant-numeric: tabular-nums;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: 0.02em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>user-select: text;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-user-select: text;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stealth-counter::selection {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #4f46e5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Completely invisible when visiting from a mobile or touch device */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 768px), (pointer: coarse) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.stealth-counter {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>display: none !important;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>visibility: hidden !important;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>opacity: 0 !important;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Responsive Adaptations */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 960px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.metrics-grid {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>grid-template-columns: 1fr 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 640px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 1rem 0.75rem 2.5rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.app-header, .controls-bar {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding-left: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding-right: 1.25rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.metrics-grid {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>grid-template-columns: 1fr;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>thead th, td {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 0.9rem 1rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.lang-btn {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>width: 108px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>min-width: 108px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>height: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 0.88rem;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="app-shell"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Header with Title, Financial Summary Cards &amp; Top-Right Fixed-Dimension Language Switcher --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;header class="app-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="header-top-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="title-block"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="eyebrow-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="period-badge"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="period-dot"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span id="ui-period"&gt;For 30 Days&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h1 id="ui-title" class="app-title"&gt;Expense &amp;amp; Hours Responsibility&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Scrollable Top-Right Segmented Language Switcher (Never shifts position) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="lang-switcher" role="group" aria-label="Language Switcher"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button id="btn-en" type="button" class="lang-btn active" onclick="setLanguage('en')"&gt;English&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button id="btn-ar" type="button" class="lang-btn" onclick="setLanguage('ar')"&gt;العربية&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Structured Financial Summary Cards --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="metrics-grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Unified Total Expenses &amp; Parenthetical Breakdown --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="metric-card metric-card-expenses"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="metric-primary-line"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span id="ui-total-expenses"&gt;Total Expenses: $4,000&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="ui-expense-breakdown" class="metric-breakdown-sub"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>(Rent $3,150 &amp;bull; Utilities $330 &amp;bull; Food $520)</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Mom's Income Emerald Card --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="metric-card metric-card-income"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="metric-primary-line"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span id="ui-moms-income"&gt;Mom's Income: $800&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="ui-moms-sub" class="metric-sub-label"&gt;Applied toward total&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Total Hours Sky-Blue Card --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="metric-card metric-card-hours"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="metric-primary-line"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span id="ui-total-hours"&gt;Total Hours: 720 hrs&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="metric-primary-line"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span id="ui-gov-hours"&gt;Hours paid by the government: 78 hrs&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="metric-primary-line"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span id="ui-remaining-hours"&gt;Total Remaining Hours: 642 hrs&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="ui-hourly-rate" class="metric-sub-label"&gt;Valued at $18 / hr&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Shared Pool Indigo Card --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="metric-card metric-card-net"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="metric-primary-line"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span id="ui-net-pool"&gt;Shared Pool: $3,200&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div id="ui-net-sub" class="metric-sub-label"&gt;Split among kids&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- New 4-Column Table Directly Under Cards --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="table-section-block"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 id="ui-top-table-title" class="table-section-title"&gt;How it is now&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="sub-table-wrapper"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span id="sub-th-kids" class="th-main"&gt;Kids&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span id="sub-th-hours-paid" class="th-main"&gt;Share of Hours (Paid)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span id="sub-th-hours-unpaid" class="th-main"&gt;Share of Hours (Unpaid)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;span id="sub-th-expenses" class="th-main"&gt;Share of Expenses&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;tbody id="sub-table-body"&gt;&lt;/tbody&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Contributor Count Selector (1-9) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="controls-bar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;label id="ui-prompt" class="prompt-title"&gt;How many kids will contribute?&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="number-buttons" class="segmented-dock" role="group" aria-label="Number of contributing kids"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 4-Column Responsibility Table (Fixed left-to-right column order) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="bottom-table-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2 id="ui-bottom-table-title" class="table-section-title"&gt;Fair distribution of time and expenses&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="table-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span id="th-kids" class="th-main"&gt;Kids&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span id="th-hours" class="th-main"&gt;Share of Hours&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span id="th-expenses" class="th-main"&gt;Share of Expenses&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span id="th-total" class="th-main"&gt;Total Share of Responsibility&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/th&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/tr&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/thead&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;tbody id="table-body"&gt;&lt;/tbody&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/table&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Stealth Desktop-Only Hit &amp; Unique Device Counter --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="stealth-hit-counter" class="stealth-counter" aria-hidden="true"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Core Financial &amp; Time Constants</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const RAW_HOURS = 720;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const GOV_PAID_HOURS = 78;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const TOTAL_HOURS = RAW_HOURS - GOV_PAID_HOURS; // 642 hrs</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const TOTAL_EXPENSES = 4000;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const MOMS_INCOME = 800;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const SHARED_EXPENSES = TOTAL_EXPENSES - MOMS_INCOME; // $3,200</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const HOURLY_RATE = 18;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Application State</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let selectedCount = 6; // Defaults to 6 kids (rows 4 through 9)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentLang = 'en';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Bilingual Dictionary (Words/labels only; numeric values &amp; column positions stay constant)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const i18n = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>en: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>title: "Expense &amp; Hours Responsibility",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>period: "For 30 Days",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>totalExpenses: "Total Expenses: $4,000",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>expenseBreakdown: "(Rent $3,150 • Utilities $330 • Food $520)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>momsIncome: "Mom's Income: $800",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>momsSub: "Applied toward total",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>totalHours: "Total Hours: 720 hrs",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>govHours: "Hours paid by the government: 78 hrs",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>remainingHours: "Total Remaining Hours: 642 hrs",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>hourlyRate: "Valued at $18 / hr",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>netPool: "Shared Pool: $3,200",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>netSub: "Split among kids",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topTableTitle: "How it is now",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bottomTableTitle: "Fair distribution of time and expenses",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>prompt: "How many kids will contribute?",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>thKids: "Kids",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>thHours: "Share of Hours",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>thExpenses: "Share of Expenses",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>thTotal: "Total Share of Responsibility",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subThKids: "Kids",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subThHoursPaid: "Share of Hours (Paid)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subThHoursUnpaid: "Share of Hours (Unpaid)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subThExpenses: "Share of Expenses",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subRow1Name: "Somaya",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subRow2Name: "Adel",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>hrs: "hrs",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>days: "days",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>or: "OR"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>},</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ar: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>title: "جدول مسؤولية المصاريف والساعات",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>period: "لمدة 30 يوم",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>totalExpenses: "المصاريف الكاملة: $4,000",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>expenseBreakdown: "(الإيجار $3,150 • المرافق $330 • الطعام $520)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>momsIncome: "دخل الأم: $800",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>momsSub: "تُخصم من المصاريف الكاملة",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>totalHours: "ساعات كاملة: 720 ساعة",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>govHours: "ساعات مدفوعة من الحكومة: 78 ساعة",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>remainingHours: "إجمالي الساعات المتبقية: 642 ساعة",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>hourlyRate: "بقيمة $18 / ساعة",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>netPool: "صافي المصاريف المشتركة: $3,200",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>netSub: "تُوزع على الأطفال",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topTableTitle: "الوضع الحالي",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bottomTableTitle: "التوزيع العادل للوقت والمصاريف",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>prompt: "كم عدد الأطفال اليشاركون؟",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>thKids: "الأطفال",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>thHours: "حصة الساعات",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>thExpenses: "حصة المصاريف",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>thTotal: "الحصة الكاملة من المسؤولية",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subThKids: "الأطفال",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subThHoursPaid: "حصة الساعات (مدفوعة)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subThHoursUnpaid: "حصة الساعات (غير مدفوعة)",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subThExpenses: "حصة المصاريف",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subRow1Name: "سمية",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>subRow2Name: "عادل",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>hrs: "ساعة",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>days: "أيام",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>or: "أو"</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Formats numbers up to 2 decimal places without trailing zeros.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function fmtNum(val) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return Number.isInteger(val)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>? val.toLocaleString('en-US')</p>
+<p class="p1"><span class="Apple-converted-space">                </span>: Number(val.toFixed(2)).toLocaleString('en-US');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Renders the 1-9 segmented contributor selector buttons.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderButtons() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const container = document.getElementById('number-buttons');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!container) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>container.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 1; i &lt;= 9; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const btn = document.createElement('button');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.type = 'button';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.className = 'num-btn' + (i === selectedCount ? ' active' : '');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.textContent = i;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.setAttribute('aria-pressed', i === selectedCount ? 'true' : 'false');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.onclick = () =&gt; selectCount(i);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>container.appendChild(btn);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Updates the selected contributor count (1-9) and re-renders the table.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function selectCount(count) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>selectedCount = count;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderButtons();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderTable();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Switches interface text between English ('en') and Arabic ('ar').</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function setLanguage(lang) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentLang = lang;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const t = i18n[lang];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('btn-en').classList.toggle('active', lang === 'en');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-title').textContent = t.title;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-period').textContent = t.period;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-total-expenses').textContent = t.totalExpenses;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-expense-breakdown').textContent = t.expenseBreakdown;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-moms-income').textContent = t.momsIncome;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-moms-sub').textContent = t.momsSub;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-total-hours').textContent = t.totalHours;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-gov-hours').textContent = t.govHours;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-remaining-hours').textContent = t.remainingHours;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-hourly-rate').textContent = t.hourlyRate;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-net-pool').textContent = t.netPool;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-net-sub').textContent = t.netSub;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('ui-prompt').textContent = t.prompt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const topTableTitle = document.getElementById('ui-top-table-title');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const bottomTableTitle = document.getElementById('ui-bottom-table-title');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (topTableTitle) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topTableTitle.textContent = t.topTableTitle;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>topTableTitle.classList.toggle('is-rtl', lang === 'ar');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (bottomTableTitle) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bottomTableTitle.textContent = t.bottomTableTitle;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>bottomTableTitle.classList.toggle('is-rtl', lang === 'ar');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const controlsBar = document.querySelector('.controls-bar');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (controlsBar) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>controlsBar.classList.toggle('is-rtl', lang === 'ar');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('th-kids').textContent = t.thKids;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('th-hours').textContent = t.thHours;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('th-expenses').textContent = t.thExpenses;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('th-total').textContent = t.thTotal;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('sub-th-kids').textContent = t.subThKids;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('sub-th-hours-paid').textContent = t.subThHoursPaid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('sub-th-hours-unpaid').textContent = t.subThHoursUnpaid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('sub-th-expenses').textContent = t.subThExpenses;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderSubTable();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderTable();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Renders the top "How it is now" table for Somaya and Adel.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderSubTable() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const tbody = document.getElementById('sub-table-body');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!tbody) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>tbody.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const t = i18n[currentLang];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const isAr = currentLang === 'ar';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const cellDir = isAr ? 'rtl' : 'ltr';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const cellClass = isAr ? 'cell-rtl' : '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const rows = [</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ name: t.subRow1Name, paidHrs: 78, unpaidHrs: 222, expense: 100 },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ name: t.subRow2Name, paidHrs: 0, unpaidHrs: 420, expense: 3100 }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>rows.forEach((row) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const tr = document.createElement('tr');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const paidDays = fmtNum(row.paidHrs / 24);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const unpaidDays = fmtNum(row.unpaidHrs / 24);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>tr.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="kid-pill-wrap"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="kid-badge"&gt;${row.name}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;td dir="${cellDir}" class="${cellClass}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="val-main"&gt;&lt;span class="bidi-num"&gt;${fmtNum(row.paidHrs)}&lt;/span&gt; ${t.hrs}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="muted-paren"&gt;(&lt;span class="bidi-num"&gt;${paidDays}&lt;/span&gt; ${t.days})&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;td dir="${cellDir}" class="${cellClass}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="val-main"&gt;&lt;span class="bidi-num"&gt;${fmtNum(row.unpaidHrs)}&lt;/span&gt; ${t.hrs}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="muted-paren"&gt;(&lt;span class="bidi-num"&gt;${unpaidDays}&lt;/span&gt; ${t.days})&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;td dir="${cellDir}" class="${cellClass}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="val-main"&gt;&lt;span class="bidi-num"&gt;$${fmtNum(row.expense)}&lt;/span&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/td&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tbody.appendChild(tr);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Renders the responsibility table rows ending at Kid 9.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderTable() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const tbody = document.getElementById('table-body');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!tbody) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>tbody.innerHTML = '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const t = i18n[currentLang];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const isAr = currentLang === 'ar';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const cellDir = isAr ? 'rtl' : 'ltr';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const cellClass = isAr ? 'cell-rtl' : '';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Exact count of rows ending with 9</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const startKid = 10 - selectedCount;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Equal division of 642 hours and 24-hour day equivalent</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const hoursEach = TOTAL_HOURS / selectedCount;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const daysEach = hoursEach / 24;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const hoursDollarEach = hoursEach * HOURLY_RATE;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const hoursFormatted = fmtNum(hoursEach);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const daysFormatted = fmtNum(daysEach);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const hoursDollarFormatted = fmtNum(hoursDollarEach);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let kid = startKid; kid &lt;= 9; kid++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const tr = document.createElement('tr');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tr.style.animationDelay = `${(kid - startKid) * 25}ms`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Expense percentage split: Kid 9 takes 100% if alone, else 75% (25% split among rest)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let expensePct = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (selectedCount === 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expensePct = 100;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (kid === 9) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expensePct = 75;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>expensePct = 25 / (selectedCount - 1);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const expenseDollar = (expensePct / 100) * SHARED_EXPENSES;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const totalDollar = hoursDollarEach + expenseDollar;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const pctFormatted = fmtNum(expensePct);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const expenseDollarFormatted = fmtNum(expenseDollar);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const totalDollarFormatted = fmtNum(totalDollar);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Column 1: Kids</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const tdKid = document.createElement('td');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tdKid.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="kid-pill-wrap"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="kid-badge"&gt;${kid}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tr.appendChild(tdKid);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Column 2: Share of Hours</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const tdHours = document.createElement('td');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tdHours.dir = cellDir;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tdHours.className = cellClass;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tdHours.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="val-main"&gt;&lt;span class="bidi-num"&gt;${hoursFormatted}&lt;/span&gt; ${t.hrs}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="muted-paren"&gt;(&lt;span class="bidi-num"&gt;${daysFormatted}&lt;/span&gt; ${t.days})&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="word-or"&gt;${t.or}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="val-main"&gt;&lt;span class="bidi-num"&gt;$${hoursDollarFormatted}&lt;/span&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tr.appendChild(tdHours);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Column 3: Share of Expenses</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const tdExpenses = document.createElement('td');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tdExpenses.dir = cellDir;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tdExpenses.className = cellClass;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tdExpenses.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="val-main"&gt;&lt;span class="bidi-num"&gt;$${expenseDollarFormatted}&lt;/span&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="muted-paren"&gt;(&lt;span class="bidi-num"&gt;${pctFormatted}%&lt;/span&gt;)&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tr.appendChild(tdExpenses);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Column 4: Total Share of Responsibility</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const tdTotal = document.createElement('td');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tdTotal.dir = cellDir;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tdTotal.className = cellClass;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tdTotal.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="val-main"&gt;&lt;span class="bidi-num"&gt;${hoursFormatted}&lt;/span&gt; ${t.hrs}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="muted-paren"&gt;(&lt;span class="bidi-num"&gt;${daysFormatted}&lt;/span&gt; ${t.days})&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="val-main"&gt; + &lt;span class="bidi-num"&gt;$${expenseDollarFormatted}&lt;/span&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="word-or"&gt;${t.or}&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span class="val-main"&gt;&lt;span class="bidi-num"&gt;$${totalDollarFormatted}&lt;/span&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tr.appendChild(tdTotal);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>tbody.appendChild(tr);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Updates the stealth desktop-only hit counter &amp; unique device counter.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateHitCounters() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const counterEl = document.getElementById('stealth-hit-counter');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!counterEl) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const hitsKey = 'expense_table_hit_count';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const uniqueCountKey = 'expense_table_unique_device_count';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const deviceFlagKey = 'expense_table_device_counted';</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const currentHits = (parseInt(localStorage.getItem(hitsKey), 10) || 0) + 1;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>localStorage.setItem(hitsKey, String(currentHits));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>let uniqueDevices = parseInt(localStorage.getItem(uniqueCountKey), 10) || 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (!localStorage.getItem(deviceFlagKey)) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>uniqueDevices += 1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>localStorage.setItem(uniqueCountKey, String(uniqueDevices));</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>localStorage.setItem(deviceFlagKey, '1');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>counterEl.textContent = `Hits: ${currentHits} | Unique: ${uniqueDevices}`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (err) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>counterEl.textContent = 'Hits: 1 | Unique: 1';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Expose functions explicitly on window for inline handlers</p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.setLanguage = setLanguage;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.selectCount = selectCount;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Initialize application</p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderButtons();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderSubTable();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderTable();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateHitCounters();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
